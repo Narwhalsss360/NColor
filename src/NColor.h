@@ -9,8 +9,8 @@
 
 #define HEXRGB_MAX 16777215
 
-#include "NDefs.h"
-#include "NFuncs.h"
+#include <NDefs.h>
+#include <NFuncs.h>
 
 typedef unsigned long HEXRGB;
 
