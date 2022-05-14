@@ -269,7 +269,7 @@ void RGBLed::setColor(Color color)
 	this->currentColor.red = color.rgb.red;
 	this->currentColor.green = color.rgb.green;
 	this->currentColor.blue = color.rgb.blue;
-	this->setColor(this->currentColor.red, this->currentColor.green, this->currentColor.blue, this-currentColor.alpha);
+	this->setColor(this->currentColor.red, this->currentColor.green, this->currentColor.blue, this->currentColor.alpha);
 }
 
 void RGBLed::setColor(byte red, byte green, byte blue)
