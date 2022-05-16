@@ -1,5 +1,5 @@
-#ifndef NColor
-#define NColor
+#ifndef NColor_h
+#define NColor_h
 
 #if defined(ARDUINO) && ARDUINO >= 100
 	#include "Arduino.h"
