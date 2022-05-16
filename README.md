@@ -8,4 +8,4 @@ You can also use this library to control an RGB LED.
 ## NColor
 ![alt text](https://github.com/Narwhalsss360/NALibs/blob/main/Example%20Carbons/NColor/NColor.png)
 ## RGBLed
-![alt text](https://github.com/Narwhalsss360/NALibs/blob/main/Example%20Carbons/NDefs/RGBLed.png)
+![alt text](https://github.com/Narwhalsss360/NALibs/blob/main/Example%20Carbons/NColor/RGBLed.png)
