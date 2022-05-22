@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Label="Globals">
     <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
@@ -14,14 +14,14 @@
     <ProjectCapability Include="SourceItemsFromImports" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="$(MSBuildThisFileDirectory)readme.txt" />
-	<Text Include="$(MSBuildThisFileDirectory)library.properties" />
-  	<Text Include="$(MSBuildThisFileDirectory)src\NColor.h" />
-  </ItemGroup>
- <ItemGroup>
-    <!-- <ClInclude Include="$(MSBuildThisFileDirectory)NColor.h" /> -->
+    <Text Include="$(MSBuildThisFileDirectory)keywords.txt" />
+    <Text Include="$(MSBuildThisFileDirectory)library.properties" />
+    <Text Include="$(MSBuildThisFileDirectory)src\NColor.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)src\NColor.cpp" />
   </ItemGroup>
-  </Project>
+  <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\NDefs\src\NDefs.h" />
+  </ItemGroup>
+</Project>
