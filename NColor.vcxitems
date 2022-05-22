@@ -21,7 +21,4 @@
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)src\NColor.cpp" />
   </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\NDefs\src\NDefs.h" />
-  </ItemGroup>
 </Project>
