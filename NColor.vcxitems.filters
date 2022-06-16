@@ -12,6 +12,9 @@
     <Filter Include="Library metadata">
       <UniqueIdentifier>{66051e1c-09c0-4c86-b4a0-0224f6a4b138}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Examples">
+      <UniqueIdentifier>{c65a65f8-11c2-4472-b4d6-95866b679a23}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)src\NColor.cpp">
@@ -28,5 +31,16 @@
     <Text Include="$(MSBuildThisFileDirectory)library.properties">
       <Filter>Library metadata</Filter>
     </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)..\NEvents\README.md">
+      <Filter>Library metadata</Filter>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)examples\NColor\NColor.ino">
+      <Filter>Examples</Filter>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)examples\RGBLed\RGBLed.ino">
+      <Filter>Examples</Filter>
+    </None>
   </ItemGroup>
 </Project>

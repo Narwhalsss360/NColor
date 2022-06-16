@@ -21,4 +21,9 @@
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)src\NColor.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)..\NEvents\README.md" />
+    <None Include="$(MSBuildThisFileDirectory)examples\NColor\NColor.ino" />
+    <None Include="$(MSBuildThisFileDirectory)examples\RGBLed\RGBLed.ino" />
+  </ItemGroup>
 </Project>
