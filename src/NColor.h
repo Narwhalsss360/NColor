@@ -7,11 +7,106 @@
 	#include "WProgram.h"
 #endif
 
-#define HEXRGB_MAX 16777215
-
 #include <NDefs.h>
 #include <NFuncs.h>
+#include "CommonColors.h"
 
+enum BaseSynchronizes
+{
+	SYNC_RGBA,
+	SYNC_HSV
+};
+
+typedef uint32_t xRGBA;
+
+struct RGBA;
+struct HSV;
+
+struct RGBAColorContainer
+{
+	RGBAColorContainer();
+
+	RGBAColorContainer(byte red, byte green, byte blue, byte alpha);
+
+	byte& operator[](unsigned short index);
+
+	union
+	{
+		byte alpha, red, green, blue;
+		byte components[4];
+	};
+};
+
+struct RGBA
+{
+	RGBA();
+
+	RGBA(const xRGBA& hex);
+
+	RGBA(byte* colors);
+
+	RGBA(byte red, byte green, byte blue, byte alpha = 255);
+
+	RGBA(const HSV& hsv);
+
+	void convertFromHSVtoRGBA(const HSV& hsv);
+
+	union
+	{
+		xRGBA hex;
+		RGBAColorContainer components;
+	};
+};
+
+struct HSV
+{
+	HSV();
+
+	HSV(const RGBA& rgba);
+
+	HSV(float hue, float saturation, float value);
+
+	void convertFromRGBAToHSV(const RGBA& rgba);
+
+	float hue, saturation, value;
+};
+
+struct Color : RGBA, HSV
+{
+	Color();
+
+	Color(const RGBA& rgba);
+
+	Color(const HSV& hsv);
+
+	void synchronize(BaseSynchronizes synchronizeBase);
+};
+
+struct RGBLEDPins
+{
+	RGBLEDPins(byte red, byte green, byte blue);
+
+	union
+	{
+		const byte red, green, blue;
+		const byte array[3];
+	};
+};
+
+class RGBLED
+{
+public:
+	RGBLED(const RGBLEDPins& pins);
+
+	void setColor(const RGBA& color);
+
+	void write(byte red, byte green, byte blue);
+
+private:
+	const RGBLEDPins pins;
+};
+
+/*
 typedef unsigned long HEXRGB;
 
 typedef struct RGB;
@@ -82,5 +177,5 @@ private:
 	const byte redPin;
 	const byte greenPin;
 	const byte bluePin;
-};
+};*/
 #endif

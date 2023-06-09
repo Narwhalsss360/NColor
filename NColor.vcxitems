@@ -26,4 +26,7 @@
     <None Include="$(MSBuildThisFileDirectory)examples\NColor\NColor.ino" />
     <None Include="$(MSBuildThisFileDirectory)examples\RGBLed\RGBLed.ino" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CommonColors.h" />
+  </ItemGroup>
 </Project>

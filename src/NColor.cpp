@@ -1,135 +1,135 @@
 #include "NColor.h"
 
-#pragma region RGBA
-/// <summary>
-/// Default Constructor
-/// </summary>
+RGBAColorContainer::RGBAColorContainer()
+	: components{ 0, 0, 0, 0 }
+{
+}
+
+RGBAColorContainer::RGBAColorContainer(byte red, byte green, byte blue, byte alpha)
+	: red(red), green(green), blue(blue), alpha(alpha)
+{
+}
+
+byte& RGBAColorContainer::operator[](unsigned short index)
+{
+	return components[index];
+}
+
 RGBA::RGBA()
-	:red(ZERO), green(ZERO), blue(ZERO), alpha(ZERO)
+	: hex(C_WHITE)
 {
-
 }
 
-/// <summary>
-/// RGB Constructor
-/// </summary>
-RGBA::RGBA(RGB rgb)
-	:red(rgb.red), green(rgb.green), blue(rgb.blue), alpha(BYTE_MAX)
+RGBA::RGBA(const xRGBA& hex)
+	: hex(hex)
 {
-
 }
 
-/// <summary>
-/// RGBA input constructor
-/// </summary>
-/// <param name="_red">Red</param>
-/// <param name="_green">Green</param>
-/// <param name="_blue">Blue</param>
-/// <param name="_alpha">Alpha</param>
-RGBA::RGBA(byte _red, byte _green, byte _blue, byte _alpha)
-	:red(_red), green(_green), blue(_blue), alpha(_alpha)
+RGBA::RGBA(byte* colors)
+	: hex(*(xRGBA*)colors)
 {
-
-}
-#pragma endregion
-
-#pragma region RGB
-/// <summary>
-/// Default Constructor
-/// </summary>
-RGB::RGB()
-	:red(ZERO), green(ZERO), blue(ZERO)
-{
-
 }
 
-/// <summary>
-/// RGBA Constructor
-/// </summary>
-RGB::RGB(RGBA rgba)
-	:red(rgba.red), green(rgba.green), blue(rgba.blue)
+RGBA::RGBA(byte red, byte green, byte blue, byte alpha = 255)
+	: components(RGBAColorContainer(red, green, blue, alpha))
 {
-
 }
 
-/// <summary>
-/// Input Constructor
-/// </summary>
-/// <param name="_red">Red</param>
-/// <param name="_green">Green</param>
-/// <param name="_blue">Blue</param>
-RGB::RGB(byte _red, byte _green, byte _blue)
-	:red(_red), green(_green), blue(_blue)
+RGBA::RGBA(const HSV& hsv)
+	: hex(C_WHITE)
 {
-
+	convertFromHSVtoRGBA(hsv);
 }
-#pragma endregion
 
-#pragma region HSV
-/// <summary>
-/// Default Constructor
-/// </summary>
+void RGBA::convertFromHSVtoRGBA(const HSV& hsv)
+{
+}
+
 HSV::HSV()
-	:hue(ZERO), saturation(ZERO), value(ZERO)
+	: hue(0), saturation(0), value(0)
 {
-
 }
 
-/// <summary>
-/// Input Constructor
-/// </summary>
-/// <param name="h">Hue</param>
-/// <param name="s">Saturation</param>
-/// <param name="v">Value</param>
+HSV::HSV(const RGBA& rgba)
+	: hue(0), saturation(0), value(0)
+{
+	convertFromRGBAToHSV(rgba);
+}
+
+HSV::HSV(float hue, float saturation, float value)
+	: hue(hue), saturation(saturation), value(value)
+{
+}
+
+void HSV::convertFromRGBAToHSV(const RGBA& rgba)
+{
+}
+
+Color::Color()
+	: RGBA(), HSV()
+{
+}
+
+Color::Color(const RGBA& rgba)
+	: RGBA(rgba), HSV(rgba)
+{
+}
+
+Color::Color(const HSV& hsv)
+	: RGBA(hsv), HSV(hsv)
+{
+}
+
+void Color::synchronize(BaseSynchronizes synchronizeBase)
+{
+	switch (synchronizeBase)
+	{
+	case SYNC_RGBA:
+		convertFromHSVtoRGBA(*this);
+		break;
+	case SYNC_HSV:
+		convertFromRGBAToHSV(*this);
+		break;
+	default:
+		break;
+	}
+}
+
+RGBLEDPins::RGBLEDPins(byte red, byte green, byte blue)
+	: red(red), green(green), blue(blue)
+{
+}
+
+RGBLED::RGBLED(const RGBLEDPins& pins)
+	: pins(pins)
+{
+	for (byte i = 0; i < 3; i++)
+		pinMode(pins.array[i], OUTPUT);
+}
+
+void RGBLED::setColor(const RGBA& color)
+{
+	write
+	(
+		color.components.red * (color.components.alpha / 255),
+		color.components.green * (color.components.alpha / 255),
+		color.components.blue * (color.components.alpha / 255)
+	);
+}
+
+void RGBLED::write(byte red, byte green, byte blue)
+{
+	analogWrite(pins.red, red);
+	analogWrite(pins.green, green);
+	analogWrite(pins.blue, blue);
+}
+
+/*
 HSV::HSV(float h, float s, float v)
 {
 	this->hue = (ZERO <= h && h <= 360) ? h : ZERO;
 	this->saturation = (ZERO <= s && s <= 100) ? s : ZERO;
 	this->value = (ZERO <= v && v <= 100) ? v : ZERO;
-}
-#pragma endregion
-
-#pragma region COLOR
-/// <summary>
-/// Default constructor.
-/// </summary>
-Color::Color()
-	:hexCode(ZERO), rgb(), hsv()
-{
-
-}
-
-/// <summary>
-/// Hex input constructor.
-/// </summary>
-/// <param name="_hexCode">Hex code</param>
-Color::Color(HEXRGB _hexCode)
-	:hexCode(_hexCode), rgb(), hsv()
-{
-	this->convertHexToRGB();
-	this->convertRGBToHSV();
-}
-
-/// <summary>
-/// HSV Constructor
-/// </summary>
-/// <param name="_hsv">HSV input</param>
-Color::Color(HSV _hsv)
-	:hexCode(ZERO), rgb(), hsv(_hsv)
-{
-	this->convertHSVToRGB();
-	this->convertRGBToHex();
-}
-
-/// <summary>
-/// RGB Constructor
-/// </summary>
-/// <param name="_rgb">RGB input</param>
-Color::Color(RGB _rgb)
-	:hexCode(ZERO), rgb(_rgb), hsv()
-{
-	this->convertRGBToHSV();
-	this->convertRGBToHex();
 }
 
 void Color::convertHexToRGB()
@@ -230,80 +230,4 @@ void Color::convertRGBToHSV()
 	}
 }
 #pragma endregion
-
-#pragma region RGBLed
-RGBLed::RGBLed(byte _redPin, byte _greenPin, byte _bluePin)
-	:redPin(_redPin), greenPin(_greenPin), bluePin(_bluePin), currentColor(RGBA(255, 255, 255, 255))
-{
-	pinMode(this->redPin, OUTPUT);
-	pinMode(this->greenPin, OUTPUT);
-	pinMode(this->bluePin, OUTPUT);
-}
-
-void RGBLed::write(byte red, byte green, byte blue)
-{
-	analogWrite(this->redPin, red);
-	analogWrite(this->greenPin, green);
-	analogWrite(this->bluePin, blue);
-}
-
-void RGBLed::setColor(RGB rgb)
-{
-	this->currentColor.red = rgb.red;
-	this->currentColor.green = rgb.green;
-	this->currentColor.blue = rgb.blue;
-	this->setColor(this->currentColor.red, this->currentColor.green, this->currentColor.blue, this->currentColor.alpha);
-}
-
-void RGBLed::setColor(RGBA rgba)
-{
-	this->currentColor.alpha = rgba.alpha;
-	this->currentColor.red = rgba.red;
-	this->currentColor.green = rgba.green;
-	this->currentColor.blue = rgba.blue;
-	this->setColor(this->currentColor.red, this->currentColor.green, this->currentColor.blue, this->currentColor.alpha);
-}
-
-void RGBLed::setColor(Color color)
-{
-	this->currentColor.red = color.rgb.red;
-	this->currentColor.green = color.rgb.green;
-	this->currentColor.blue = color.rgb.blue;
-	this->setColor(this->currentColor.red, this->currentColor.green, this->currentColor.blue, this->currentColor.alpha);
-}
-
-void RGBLed::setColor(byte red, byte green, byte blue)
-{
-	this->currentColor.red = red;
-	this->currentColor.green = green;
-	this->currentColor.blue = blue;
-	this->setColor(this->currentColor.red, this->currentColor.green, this->currentColor.blue, this->currentColor.alpha);
-}
-
-void RGBLed::setColor(byte red, byte green, byte blue, byte brightness)
-{
-	this->currentColor.alpha = brightness;
-	this->currentColor.red = red;
-	this->currentColor.green = green;
-	this->currentColor.blue = blue;
-	this->write(map(this->currentColor.red, ZERO, BYTE_MAX, ZERO, this->currentColor.alpha),
-				map(this->currentColor.green, ZERO, BYTE_MAX, ZERO, this->currentColor.alpha), 
-				map(this->currentColor.blue, ZERO, BYTE_MAX, ZERO, this->currentColor.alpha));
-}
-
-void RGBLed::setBrightness(byte brightness)
-{
-	this->currentColor.alpha = brightness;
-	this->setColor(this->currentColor);
-}
-
-void RGBLed::off()
-{
-	this->write(0, 0, 0);
-}
-
-void RGBLed::on()
-{
-	this->setColor(this->currentColor);
-}
-#pragma endregion
+*/
