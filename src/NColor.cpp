@@ -6,7 +6,7 @@ RGBAColorContainer::RGBAColorContainer()
 }
 
 RGBAColorContainer::RGBAColorContainer(byte red, byte green, byte blue, byte alpha)
-	: red(red), green(green), blue(blue), alpha(alpha)
+	: components{ alpha, red, green, blue }
 {
 }
 
@@ -96,7 +96,7 @@ void Color::synchronize(BaseSynchronizes synchronizeBase)
 }
 
 RGBLEDPins::RGBLEDPins(byte red, byte green, byte blue)
-	: red(red), green(green), blue(blue)
+	: array{ red, green, blue }
 {
 }
 
