@@ -44,7 +44,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="$(MSBuildThisFileDirectory)CommonColors.h">
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\CommonColors.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
