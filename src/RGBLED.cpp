@@ -3,6 +3,9 @@
 RGBLED::RGBLED(const byte redPin, const byte greenPin, const byte bluePin)
     : redPin(redPin), greenPin(greenPin), bluePin(bluePin)
 {
+    pinMode(redPin, OUTPUT);
+    pinMode(greenPin, OUTPUT);
+    pinMode(bluePin, OUTPUT);
 }
 
 void RGBLED::setColor(RGBA rgba)
