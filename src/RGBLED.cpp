@@ -12,15 +12,17 @@ void RGBLED::setColor(RGBA rgba)
 {
     write
     (
-        rgba.colors.red * (rgba.colors.alpha / 255),
-        rgba.colors.green * (rgba.colors.alpha / 255),
-        rgba.colors.blue * (rgba.colors.alpha / 255)
+        rgba.colors.red * (rgba.colors.alpha / 255.0),
+        rgba.colors.green * (rgba.colors.alpha / 255.0),
+        rgba.colors.blue * (rgba.colors.alpha / 255.0)
     );
 }
 
-void RGBLED::setColor(HSV hsv)
+void RGBLED::setColor(HSV hsv, byte alpha)
 {
-    setColor(convertToRGBA(hsv));
+    RGBA rgba = convertToRGBA(hsv);
+    rgba.colors.alpha = alpha;
+    setColor(rgba);
 }
 
 void RGBLED::write(byte red, byte green, byte blue)

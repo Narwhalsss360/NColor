@@ -18,7 +18,7 @@ public:
 
     void setColor(RGBA rgba);
 
-    void setColor(HSV hsv);
+    void setColor(HSV hsv, byte alpha = 255);
 
     void write(byte red, byte green, byte blue);
 private:
