@@ -2,6 +2,12 @@
 #include "RGBA.h"
 #include "HSV.h"
 
+#if defined(ARDUINO) && ARDUINO >= 100
+	#include "Arduino.h"
+#else
+	#include "WProgram.h"
+#endif
+
 RGBA convertToRGBA(const HSV& hsv)
 {
     float s = hsv.saturation / 100;
