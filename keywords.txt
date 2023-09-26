@@ -1,27 +1,25 @@
 NColor              	LITERAL1
 
-HEXRGB_MAX          	LITERAL1
-HEXRGB              	LITERAL1
+xRGBA                 	LITERAL1
 
-RGB					    KEYWORD1
-RGBA					KEYWORD1
-red					    KEYWORD2
-green					KEYWORD2
-blue					KEYWORD2
+RGBAStructure         	LITERAL1
 alpha					KEYWORD2
+blue					KEYWORD2
+green					KEYWORD2
+red					    KEYWORD2
+
+RGBA					LITERAL1
+colors                  KEYWORD2
+hex                     KEYWORD2
 
 HSV					    KEYWORD1
 hue					    KEYWORD2
 saturation				KEYWORD2
 value					KEYWORD2
 
-Color					KEYWORD1
-rgb					    KEYWORD2
-hsv					    KEYWORD2
-hexCode				    KEYWORD2
+convertToRGBA           KEYWORD2
+convertToHSV            KEYWORD2
 
-RGBLed                  KEYWORD1
+RGBLED                  LITERAL1
 setColor                KEYWORD2
-setBrightness           KEYWORD2
-on                      KEYWORD2
-off                     KEYWORD2
+write                   KEYWORD2
