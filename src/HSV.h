@@ -1,14 +1,20 @@
 #ifndef HSV_h
 #define HSV_h
 
-struct HSV
-{
-	HSV(const float& hue = 0, const float& saturation = 100, const float& value = 100);
+#include "RGBA.h"
 
-	float
-		hue,
-		saturation,
-		value;
+struct HSV {
+    float
+        hue,
+        saturation,
+        value;
+
+    HSV(float hue = 0, float saturation = 0, float value = 0);
+
+    HSV(const RGBA& rgba);
+
+    operator RGBA() const;
 };
+
 
 #endif

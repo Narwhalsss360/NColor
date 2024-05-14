@@ -1,6 +1,14 @@
 #include "HSV.h"
 
-HSV::HSV(const float& hue, const float& saturation, const float& value)
+HSV::HSV(float hue, float saturation, float value)
     : hue(hue), saturation(saturation), value(value)
+{}
+
+HSV::HSV(const RGBA& rgba)
+    : HSV((HSV)rgba)
 {
+}
+
+HSV::operator RGBA() const {
+    return RGBA(*this);
 }

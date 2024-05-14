@@ -1,19 +1,30 @@
 #ifndef RGBA_h
 #define RGBA_h
 
-#include "RGBAStructure.h"
+#include <stdint.h>
 
-struct RGBA
-{
-	RGBA(const xRGBA& hex);
+struct HSV;
 
-	RGBA(const uint8_t& red = 0xFF, const uint8_t& green = 0xFF, const uint8_t& blue = 0xFF, const uint8_t& alpha = 0xFF);
+union RGBA {
+    struct Components {
+        uint8_t
+            blue,
+            green,
+            red,
+            alpha;
+    } components;
 
-	union
-	{
-		RGBAStructure colors;
-		xRGBA hex;
-	};
+    uint32_t hex;
+
+    RGBA(uint32_t hex = 0);
+
+    RGBA(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha = 0);
+
+    RGBA(Components components);
+
+    RGBA(const HSV& hsv);
+
+    operator HSV() const;
 };
 
 #endif
