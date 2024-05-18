@@ -1,25 +1,26 @@
 NColor              	LITERAL1
 
-xRGBA                 	LITERAL1
-
-RGBAStructure         	LITERAL1
+RGBA         	        LITERAL1
 alpha					KEYWORD2
 blue					KEYWORD2
 green					KEYWORD2
 red					    KEYWORD2
-
-RGBA					LITERAL1
-colors                  KEYWORD2
+components              KEYWORD2
 hex                     KEYWORD2
 
 HSV					    KEYWORD1
 hue					    KEYWORD2
 saturation				KEYWORD2
 value					KEYWORD2
-
 convertToRGBA           KEYWORD2
 convertToHSV            KEYWORD2
 
-RGBLED                  LITERAL1
-setColor                KEYWORD2
-write                   KEYWORD2
+Color                   LITERAL1
+setRead                 KEYWORD2
+setGreen                KEYWORD2
+setBlue                 KEYWORD2
+setHue                  KEYWORD2
+setSaturation           KEYWORD2
+setValue                KEYWORD2
+asRGBA                  KEYWORD2
+asHSV                   KEYWORD2
