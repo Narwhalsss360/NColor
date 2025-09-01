@@ -22,7 +22,7 @@ union RGBA {
 
     RGBA(Components components);
 
-    RGBA(const HSV& hsv);
+    explicit RGBA(const HSV& hsv);
 
     operator HSV() const;
 };

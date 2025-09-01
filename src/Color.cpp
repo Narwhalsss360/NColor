@@ -74,11 +74,11 @@ void Color::setValue(float value) {
     rgba = (RGBA)hsv;
 }
 
-RGBA Color::asRGBA() const {
+const RGBA& Color::asRGBA() const {
     return rgba;
 }
 
-HSV Color::asHSV() const {
+const HSV& Color::asHSV() const {
     return hsv;
 }
 

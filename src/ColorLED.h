@@ -7,11 +7,17 @@ class ColorLED {
 public:
     ColorLED(uint8_t redPin, uint8_t greenPin, uint8_t bluePin, Color initialColor = Color());
 
-    operator Color() const;
+    const Color& color() const;
 
-    operator RGBA() const;
+    const RGBA& rgba() const;
 
-    operator HSV() const;
+    const HSV& hsv() const;
+
+    operator const Color&() const;
+
+    operator const RGBA&() const;
+
+    operator const HSV&() const;
 
     ColorLED& operator=(const Color& color);
 
@@ -22,8 +28,8 @@ public:
 private:
     void write();
 
-    uint8_t redPin, greenPin, bluePin;
-    Color color;
+    uint8_t _redPin, _greenPin, _bluePin;
+    Color _color;
 };
 
 #endif

@@ -11,7 +11,7 @@ struct HSV {
 
     HSV(float hue = 0, float saturation = 0, float value = 0);
 
-    HSV(const RGBA& rgba);
+    explicit HSV(const RGBA& rgba);
 
     operator RGBA() const;
 };

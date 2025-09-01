@@ -40,9 +40,9 @@ public:
 
     void setValue(float value);
 
-    RGBA asRGBA() const;
+    const RGBA& asRGBA() const;
 
-    HSV asHSV() const;
+    const HSV& asHSV() const;
 
     Color& operator=(const RGBA& rgba);
 

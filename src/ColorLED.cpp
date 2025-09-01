@@ -2,46 +2,58 @@
 #include <Arduino.h>
 
 ColorLED::ColorLED(uint8_t redPin, uint8_t greenPin, uint8_t bluePin, Color initialColor)
-    : redPin(redPin), greenPin(greenPin), bluePin(bluePin), color(initialColor)
+    : _redPin(redPin), _greenPin(greenPin), _bluePin(bluePin), _color(initialColor)
 {
     pinMode(redPin, OUTPUT);
     pinMode(greenPin, OUTPUT);
     pinMode(bluePin, OUTPUT);
 }
 
-ColorLED::operator Color() const {
-    return color;
+const Color& ColorLED::color() const {
+    return _color;
 }
 
-ColorLED::operator RGBA() const {
-    return color.asRGBA();
+const RGBA& ColorLED::rgba() const {
+    return _color.asRGBA();
 }
 
-ColorLED::operator HSV() const {
-    return color.asHSV();
+const HSV& ColorLED::hsv() const {
+    return _color.asHSV();
+}
+
+ColorLED::operator const Color&() const {
+    return _color;
+}
+
+ColorLED::operator const RGBA&() const {
+    return _color.asRGBA();
+}
+
+ColorLED::operator const HSV&() const {
+    return _color.asHSV();
 }
 
 ColorLED& ColorLED::operator=(const Color& color) {
-    this->color = color;
+    _color = color;
     write();
     return *this;
 }
 
 ColorLED& ColorLED::operator=(const RGBA& rgba) {
-    color = rgba;
+    _color = rgba;
     write();
     return *this;
 }
 
 ColorLED& ColorLED::operator=(const HSV& hsv) {
-    color = hsv;
+    _color = hsv;
     write();
     return *this;
 }
 
 void ColorLED::write() {
-    const RGBA& rgba = (const RGBA&)color;
-    analogWrite(redPin, rgba.components.red);
-    analogWrite(redPin, rgba.components.green);
-    analogWrite(redPin, rgba.components.blue);
+    const RGBA& rgba = _color.asRGBA();
+    analogWrite(_redPin, rgba.components.red);
+    analogWrite(_greenPin, rgba.components.green);
+    analogWrite(_bluePin, rgba.components.blue);
 }
